@@ -139,6 +139,12 @@ struct ContentView: View {
 
 struct VendingMachineView: View {
     let isDispensing: Bool
+    private var machineWidth: CGFloat {
+        UIDevice.current.userInterfaceIdiom == .pad ? 360 : 260
+    }
+    private var machineHeight: CGFloat {
+        UIDevice.current.userInterfaceIdiom == .pad ? 460 : 340
+    }
 
     var body: some View {
         VStack(spacing: 16) {
@@ -151,7 +157,7 @@ struct VendingMachineView: View {
                             startPoint: .top, endPoint: .bottom
                         )
                     )
-                    .frame(width: 260, height: 340)
+                    .frame(width: machineWidth, height: machineHeight)
                     .overlay(
                         RoundedRectangle(cornerRadius: 20)
                             .stroke(Color.white.opacity(0.1), lineWidth: 1)
@@ -198,6 +204,7 @@ struct VendingMachineView: View {
                 }
             }
         }
+        .contentShape(Rectangle())
     }
 
     private func sampleColor(for index: Int) -> Color {
