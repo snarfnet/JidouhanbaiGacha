@@ -113,13 +113,19 @@ struct ContentView: View {
 
 struct VendingMachineView: View {
     let isDispensing: Bool
+    private var machineWidth: CGFloat {
+        UIDevice.current.userInterfaceIdiom == .pad ? 400 : 320
+    }
+    private var machineHeight: CGFloat {
+        UIDevice.current.userInterfaceIdiom == .pad ? 450 : 360
+    }
 
     var body: some View {
         ZStack {
             Image("HeroArtwork")
                 .resizable()
                 .scaledToFit()
-                .frame(width: 320, height: 360)
+                .frame(width: machineWidth, height: machineHeight)
                 .clipShape(RoundedRectangle(cornerRadius: 28))
                 .overlay(RoundedRectangle(cornerRadius: 28).stroke(.white.opacity(0.18)))
                 .shadow(color: .black.opacity(0.45), radius: 24, y: 14)
@@ -134,8 +140,9 @@ struct VendingMachineView: View {
                     .background(.black.opacity(0.52), in: Capsule())
                     .padding(.bottom, 28)
             }
-            .frame(width: 320, height: 360)
+            .frame(width: machineWidth, height: machineHeight)
         }
+        .contentShape(Rectangle())
     }
 }
 
